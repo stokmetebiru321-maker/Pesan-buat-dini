@@ -7,35 +7,32 @@
     <style>
         body { 
             margin: 0; 
-            background: radial-gradient(circle at center, #1e293b, #0f172a, #020617); 
-            color: #f1f5f9; 
+            background: radial-gradient(circle at center, #2d3748, #1a202c, #000000); 
+            color: #f7fafc; 
             font-family: 'Segoe UI', sans-serif; 
             display: flex; justify-content: center; align-items: center; 
             min-height: 100vh; overflow: hidden; text-align: center; 
         }
         .card { 
-            background: rgba(30, 41, 59, 0.4); 
-            backdrop-filter: blur(15px); 
-            padding: 30px; border-radius: 25px; 
-            width: 85%; max-width: 400px; 
+            background: rgba(255, 255, 255, 0.05); 
+            backdrop-filter: blur(20px); 
+            padding: 40px; border-radius: 30px; 
+            width: 85%; max-width: 350px; 
             border: 1px solid rgba(255,255,255,0.1); 
-            display: none; position: relative; 
+            display: none; position: absolute;
         }
-        .active { display: block; animation: fadeIn 1s; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .active { display: block; animation: smoothFade 1s ease-in-out; }
+        @keyframes smoothFade { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         
-        img { width: 100%; max-width: 240px; border-radius: 20px; margin: 15px 0; border: 2px solid #38bdf8; }
-        button { background: #38bdf8; color: white; border: none; padding: 12px 30px; border-radius: 50px; cursor: pointer; font-weight: bold; }
+        img { width: 100%; max-width: 200px; border-radius: 15px; margin: 20px 0; border: 2px solid #63b3ed; }
+        button { background: #63b3ed; color: #1a202c; border: none; padding: 12px 30px; border-radius: 50px; cursor: pointer; font-weight: bold; margin-top: 20px; transition: 0.3s; }
+        button:hover { background: #fff; }
 
-        /* Pola Hati */
+        /* Pola Hati di Akhir */
         .heart-container { position: relative; width: 300px; height: 300px; margin: 0 auto; display: flex; justify-content: center; align-items: center; }
-        .heart-text { position: absolute; font-size: 10px; color: #38bdf8; animation: pulse 1.2s infinite ease-in-out; }
-        .name-center { font-size: 35px; font-weight: bold; color: #fff; text-shadow: 0 0 20px #38bdf8; }
-        
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.6; }
-            50% { transform: scale(1.1); opacity: 1; }
-        }
+        .heart-text { position: absolute; font-size: 11px; color: #63b3ed; font-weight: bold; animation: heartbeat 2s infinite ease-in-out; }
+        .name-center { font-size: 32px; font-weight: bold; color: #fff; text-shadow: 0 0 20px #63b3ed; }
+        @keyframes heartbeat { 0%, 100% { transform: scale(1); opacity: 0.7; } 50% { transform: scale(1.1); opacity: 1; } }
     </style>
 </head>
 <body>
@@ -68,7 +65,7 @@
         <div class="heart-container" id="heart">
             <div class="name-center">Dini</div>
         </div>
-        <button onclick="location.reload()" style="margin-top: 50px;">Ulangi dari awal</button>
+        <button onclick="location.reload()">Ulangi</button>
     </div>
 
     <script>
@@ -79,16 +76,16 @@
         }
         function createHeart() {
             const container = document.getElementById('heart');
-            const total = 45;
+            const total = 50;
             for (let i = 0; i < total; i++) {
                 const angle = (i / total) * (2 * Math.PI);
-                const x = 130 * Math.pow(Math.sin(angle), 3);
-                const y = - (110 * Math.cos(angle) - 45 * Math.cos(2 * angle) - 20 * Math.cos(3 * angle) - 10 * Math.cos(4 * angle));
+                const x = 120 * Math.pow(Math.sin(angle), 3);
+                const y = - (100 * Math.cos(angle) - 40 * Math.cos(2 * angle) - 20 * Math.cos(3 * angle) - 10 * Math.cos(4 * angle));
                 const span = document.createElement('div');
                 span.className = 'heart-text';
                 span.innerText = 'I love you';
-                span.style.left = (145 + x) + 'px';
-                span.style.top = (145 + y) + 'px';
+                span.style.left = (135 + x) + 'px';
+                span.style.top = (140 + y) + 'px';
                 span.style.animationDelay = (i * 0.05) + 's';
                 container.appendChild(span);
             }
