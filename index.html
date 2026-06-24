@@ -3,13 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pertunjukan Spesial untuk Dini</title>
+    <title>Untuk Dini</title>
     <style>
-        body { margin: 0; background: #1a1a2e; color: #fff; font-family: 'Arial', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; text-align: center; }
-        .card { background: #16213e; padding: 30px; border-radius: 20px; width: 85%; max-width: 400px; border: 1px solid #4e4e6a; display: none; }
-        .active { display: block; }
-        img { width: 100%; max-width: 250px; border-radius: 10px; margin: 15px 0; border: 3px solid #fff; }
-        button { background: #e94560; color: white; border: none; padding: 12px 25px; border-radius: 25px; margin-top: 20px; cursor: pointer; font-weight: bold; }
+        body { 
+            margin: 0; 
+            background: radial-gradient(circle at center, #1e293b, #0f172a, #020617); 
+            color: #f1f5f9; 
+            font-family: 'Segoe UI', sans-serif; 
+            display: flex; justify-content: center; align-items: center; 
+            min-height: 100vh; overflow: hidden; text-align: center; 
+        }
+        .card { 
+            background: rgba(30, 41, 59, 0.4); 
+            backdrop-filter: blur(15px); 
+            padding: 30px; border-radius: 25px; 
+            width: 85%; max-width: 400px; 
+            border: 1px solid rgba(255,255,255,0.1); 
+            display: none; position: relative; 
+        }
+        .active { display: block; animation: fadeIn 1s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
+        img { width: 100%; max-width: 240px; border-radius: 20px; margin: 15px 0; border: 2px solid #38bdf8; }
+        button { background: #38bdf8; color: white; border: none; padding: 12px 30px; border-radius: 50px; cursor: pointer; font-weight: bold; }
+
+        /* Pola Hati */
+        .heart-container { position: relative; width: 300px; height: 300px; margin: 0 auto; display: flex; justify-content: center; align-items: center; }
+        .heart-text { position: absolute; font-size: 10px; color: #38bdf8; animation: pulse 1.2s infinite ease-in-out; }
+        .name-center { font-size: 35px; font-weight: bold; color: #fff; text-shadow: 0 0 20px #38bdf8; }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.6; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
     </style>
 </head>
 <body>
@@ -21,36 +47,51 @@
     </div>
 
     <div id="slide1" class="card">
-        <h3>Babak 1 / 3</h3>
-        <img src="foto1.jpg" alt="foto-pacar.jpg">
+        <img src="foto-pacar.jpg" alt="Dini">
         <p>Rambut kamu di foto ini jatuhnya niat banget. Acaknya cantik, berantakannya estetik.</p>
-        <button onclick="next(2)">Lanjut cerita</button>
+        <button onclick="next(2)">Lanjut</button>
     </div>
 
     <div id="slide2" class="card">
-        <h3>Babak 2 / 3</h3>
-        <img src="foto2.jpg" alt="foto-pacar.jpg">
+        <img src="foto-pacar.jpg" alt="Dini">
         <p>Senyum kamu kecil, tapi efeknya besar banget. Wajah kamu tetap punya glow sendiri.</p>
-        <button onclick="next(3)">Lanjut cerita</button>
+        <button onclick="next(3)">Lanjut</button>
     </div>
 
     <div id="slide3" class="card">
-        <h3>Babak 3 / 3</h3>
-        <img src="foto3.jpg" alt="foto-pacar.jpg">
+        <img src="foto-pacar.jpg" alt="Dini">
         <p>Meteor pun kalah terang kalau dibandingin sama kamu. Aku pilih kamu pemenangnya.</p>
         <button onclick="next(4)">Lihat penutup</button>
     </div>
 
     <div id="slide4" class="card">
-        <h1>Mwehehehe</h1>
-        <p>Makasih ya sudah mau sabar sama aku. Love you, Dini!</p>
-        <button onclick="location.reload()">Ulang dari awal</button>
+        <div class="heart-container" id="heart">
+            <div class="name-center">Dini</div>
+        </div>
+        <button onclick="location.reload()" style="margin-top: 50px;">Ulangi dari awal</button>
     </div>
 
     <script>
         function next(id) {
             document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
             document.getElementById('slide' + id).classList.add('active');
+            if(id === 4) createHeart();
+        }
+        function createHeart() {
+            const container = document.getElementById('heart');
+            const total = 45;
+            for (let i = 0; i < total; i++) {
+                const angle = (i / total) * (2 * Math.PI);
+                const x = 130 * Math.pow(Math.sin(angle), 3);
+                const y = - (110 * Math.cos(angle) - 45 * Math.cos(2 * angle) - 20 * Math.cos(3 * angle) - 10 * Math.cos(4 * angle));
+                const span = document.createElement('div');
+                span.className = 'heart-text';
+                span.innerText = 'I love you';
+                span.style.left = (145 + x) + 'px';
+                span.style.top = (145 + y) + 'px';
+                span.style.animationDelay = (i * 0.05) + 's';
+                container.appendChild(span);
+            }
         }
     </script>
 </body>
