@@ -3,47 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Surat Spesial untuk Dini</title>
+    <title>Pertunjukan Spesial untuk Dini</title>
     <style>
-        /* CSS: Mengatur Tampilan */
-        body { margin: 0; background: #0f172a; color: #f8fafc; font-family: 'Arial', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow-x: hidden; }
-        .container { width: 90%; max-width: 500px; text-align: center; padding: 30px; background: #1e293b; border-radius: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.4); border: 2px solid #38bdf8; transition: transform 0.3s; }
-        .container:hover { transform: scale(1.02); }
-        h1 { color: #38bdf8; font-size: 2rem; margin-bottom: 10px; }
-        .foto-box { width: 200px; height: 200px; margin: 20px auto; border-radius: 50%; overflow: hidden; border: 5px solid #38bdf8; display: flex; justify-content: center; align-items: center; }
-        .foto-box img { width: 100%; height: 100%; object-fit: cover; }
-        .pesan { font-size: 1.1rem; line-height: 1.8; color: #cbd5e1; margin: 20px 0; }
-        .tombol { background: #38bdf8; color: white; padding: 12px 30px; border: none; border-radius: 25px; cursor: pointer; font-size: 1rem; font-weight: bold; transition: background 0.3s; }
-        .tombol:hover { background: #0ea5e9; }
-        #pesanRahasia { display: none; margin-top: 20px; font-style: italic; color: #bae6fd; }
+        body { margin: 0; background: #1a1a2e; color: #fff; font-family: 'Arial', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; text-align: center; }
+        .card { background: #16213e; padding: 30px; border-radius: 20px; width: 85%; max-width: 400px; border: 1px solid #4e4e6a; display: none; }
+        .active { display: block; }
+        img { width: 100%; max-width: 250px; border-radius: 10px; margin: 15px 0; border: 3px solid #fff; }
+        button { background: #e94560; color: white; border: none; padding: 12px 25px; border-radius: 25px; margin-top: 20px; cursor: pointer; font-weight: bold; }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>Halo Dini Sayang</h1>
-        <div class="foto-box">
-            <img src="foto.jpg" alt="Foto Dini">
-        </div>
-        
-        <p class="pesan">
-            Dini, makasih ya sudah jadi bagian terindah dalam hidup aku. 
-            Setiap hari aku selalu mikirin kamu dan berharap bisa bikin kamu senyum terus. 
-            Kamu itu berharga banget buat aku, lebih dari yang bisa aku jelasin lewat kata-kata.
-        </p>
+    <div id="slide0" class="card active">
+        <h1>Pertunjukan Spesial</h1>
+        <p>Khusus buat sayangku Dini</p>
+        <button onclick="next(1)">Buka Tirai</button>
+    </div>
 
-        <button class="tombol" onclick="tampilkanPesan()">Klik untuk Pesan Rahasia</button>
-        
-        <div id="pesanRahasia">
-            <p>Aku janji bakal selalu jaga kamu dan selalu ada buat kamu. I love you, Dini!</p>
-            <p>— Aditya</p>
-        </div>
+    <div id="slide1" class="card">
+        <h3>Babak 1 / 3</h3>
+        <img src="foto1.jpg" alt="foto-pacar.jpg">
+        <p>Rambut kamu di foto ini jatuhnya niat banget. Acaknya cantik, berantakannya estetik.</p>
+        <button onclick="next(2)">Lanjut cerita</button>
+    </div>
+
+    <div id="slide2" class="card">
+        <h3>Babak 2 / 3</h3>
+        <img src="foto2.jpg" alt="foto-pacar.jpg">
+        <p>Senyum kamu kecil, tapi efeknya besar banget. Wajah kamu tetap punya glow sendiri.</p>
+        <button onclick="next(3)">Lanjut cerita</button>
+    </div>
+
+    <div id="slide3" class="card">
+        <h3>Babak 3 / 3</h3>
+        <img src="foto3.jpg" alt="foto-pacar.jpg">
+        <p>Meteor pun kalah terang kalau dibandingin sama kamu. Aku pilih kamu pemenangnya.</p>
+        <button onclick="next(4)">Lihat penutup</button>
+    </div>
+
+    <div id="slide4" class="card">
+        <h1>Mwehehehe</h1>
+        <p>Makasih ya sudah mau sabar sama aku. Love you, Dini!</p>
+        <button onclick="location.reload()">Ulang dari awal</button>
     </div>
 
     <script>
-        // JavaScript: Membuat website jadi interaktif
-        function tampilkanPesan() {
-            document.getElementById('pesanRahasia').style.display = 'block';
+        function next(id) {
+            document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
+            document.getElementById('slide' + id).classList.add('active');
         }
     </script>
 </body>
